@@ -165,6 +165,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         show_points(topk_xy, topk_label, plt.gca())
         plt.title(f"Mask {best_idx}", fontsize=18)
         plt.axis('off')
+        test_idx = "result"
         vis_mask_output_path = os.path.join(output_path, f'vis_mask_{test_idx}.jpg')
         with open(vis_mask_output_path, 'wb') as outfile:
             plt.savefig(outfile, format='jpg')
