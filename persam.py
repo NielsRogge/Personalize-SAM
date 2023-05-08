@@ -51,8 +51,11 @@ def persam(args, obj_name, images_path, masks_path, output_path):
     
     # Path preparation
     ref_image_path = os.path.join(images_path, obj_name, args.ref_idx + '.jpg')
+    print("Reference image path:", ref_image_path)
     ref_mask_path = os.path.join(masks_path, obj_name, args.ref_idx + '.png')
+    print("Reference mask path:", ref_mask_path)
     test_images_path = os.path.join(images_path, obj_name)
+    print("Test image path:", test_images_path)
 
     output_path = os.path.join(output_path, obj_name)
     os.makedirs(output_path, exist_ok=True)
