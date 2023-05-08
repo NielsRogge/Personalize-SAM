@@ -93,7 +93,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
     
         # Load test image
         # test_idx = '%02d' % test_idx
-        test_image_path = test_images_path + 'test_image.jpg'
+        test_image_path = test_images_path + '/test_image.jpg'
         print("Test image path:", test_images_path)
         test_image = cv2.imread(test_image_path)
         test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2RGB)
