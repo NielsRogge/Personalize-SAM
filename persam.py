@@ -87,6 +87,9 @@ def persam(args, obj_name, images_path, masks_path, output_path):
     target_feat = target_embedding / target_embedding.norm(dim=-1, keepdim=True)
     target_embedding = target_embedding.unsqueeze(0)
 
+    print("Shape of target_embedding:", target_embedding.shape)
+    print("First values of target_embedding:", target_embedding[0, :3, :3])
+
 
     print('======> Start Testing')
     for test_idx in tqdm(range(len(os.listdir(test_images_path)))):
