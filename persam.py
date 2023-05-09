@@ -75,6 +75,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
 
     print("======> Obtain Location Prior" )
     # Image features encoding
+    print("Ref image:")
     ref_mask = predictor.set_image(ref_image, ref_mask)
     ref_feat = predictor.features.squeeze().permute(1, 2, 0)
 
@@ -102,6 +103,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         test_image = cv2.cvtColor(test_image, cv2.COLOR_BGR2RGB)
 
         # Image feature encoding
+        print("Test image:")
         predictor.set_image(test_image)
         test_feat = predictor.features.squeeze()
 
