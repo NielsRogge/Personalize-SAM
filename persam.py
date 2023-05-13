@@ -144,6 +144,9 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         print("Shape of attn_sim:", attn_sim.shape)
         print("First values of attn_sim:", attn_sim[0,0,0,:3])
 
+        print("Topk_xy:", topk_xy)
+        print("Topk_label:", topk_label)
+
         # First-step prediction
         masks, scores, logits, _ = predictor.predict(
             point_coords=topk_xy, 
