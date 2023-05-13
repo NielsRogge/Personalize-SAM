@@ -121,6 +121,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         sim = F.interpolate(sim, scale_factor=4, mode="bilinear")
 
         print("Shape of sim:", sim.shape)
+        print("First values of sim:", sim[0, 0, :3, :3])
 
         sim = predictor.model.postprocess_masks(
                         sim,
@@ -136,6 +137,8 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         sim = (sim - sim.mean()) / torch.std(sim)
         sim = F.interpolate(sim.unsqueeze(0).unsqueeze(0), size=(64, 64), mode="bilinear")
         attn_sim = sim.sigmoid_().unsqueeze(0).flatten(3)
+
+        print("Shape of attn_sim:", attn_sim.shape)
 
         # First-step prediction
         masks, scores, logits, _ = predictor.predict(
