@@ -129,7 +129,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
                         original_size=predictor.original_size).squeeze()
         
         print("Shape of sim after postprocessing:", sim.shape)
-        print("First values of sim after postprocessing:", sim[0,:3, :3])
+        print("First values of sim after postprocessing:", sim[:3, :3])
 
         # Positive-negative location prior
         topk_xy_i, topk_label_i, last_xy_i, last_label_i = point_selection(sim, topk=1)
