@@ -101,6 +101,7 @@ class SamPredictor:
 
           print("Shape of input_image:", input_image.shape)
           print("First values of input_image:", input_image[0,0,:3,:3])
+          print("Mean value of input_image:", input_image.mean())
 
           self.features = self.model.image_encoder(input_image)
           self.is_image_set = True
