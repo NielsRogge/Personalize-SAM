@@ -158,7 +158,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         best_idx = 0
 
         print("Shape of masks after first step prediction:", masks.shape)
-        print("Mean value of mask:", masks.float().mean())
+        print("Mean value of mask:", masks.astype('float64').mean())
 
         # Cascaded Post-refinement-1
         masks, scores, logits, _ = predictor.predict(
