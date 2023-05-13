@@ -79,6 +79,9 @@ def persam(args, obj_name, images_path, masks_path, output_path):
     ref_mask = predictor.set_image(ref_image, ref_mask)
     ref_feat = predictor.features.squeeze().permute(1, 2, 0)
 
+    print("Shape of ref_feat:", ref_feat.shape)
+    print("First values of ref_feat:", ref_feat[0, :3, :3])
+
     ref_mask = F.interpolate(ref_mask, size=ref_feat.shape[0: 2], mode="bilinear")
     ref_mask = ref_mask.squeeze()[0]
 
