@@ -68,7 +68,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
     
 
     print("======> Load SAM" )
-    sam_type, sam_ckpt = 'vit_b', args.ckpt
+    sam_type, sam_ckpt = 'vit_h', args.ckpt
     sam = sam_model_registry[sam_type](checkpoint=sam_ckpt).cuda()
     sam.eval()
     predictor = SamPredictor(sam)
