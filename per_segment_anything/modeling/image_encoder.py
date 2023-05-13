@@ -108,14 +108,8 @@ class ImageEncoderViT(nn.Module):
         if self.pos_embed is not None:
             x = x + self.pos_embed
 
-        print("Shape of embeddings before blocks: ", x.shape)
-        print("First values of embeddings before blocks:", x[0,:3,:3])
-
         for blk in self.blocks:
-            x = blk(x)
-
-        print("Shape of embeddings after blocks: ", x.shape)
-        print("First values of embeddings after blocks:", x[0,:3,:3])        
+            x = blk(x)     
 
         x = self.neck(x.permute(0, 3, 1, 2))
 

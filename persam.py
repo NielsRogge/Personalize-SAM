@@ -119,6 +119,9 @@ def persam(args, obj_name, images_path, masks_path, output_path):
 
         sim = sim.reshape(1, 1, h, w)
         sim = F.interpolate(sim, scale_factor=4, mode="bilinear")
+
+        print("Shape of sim:", sim.shape)
+
         sim = predictor.model.postprocess_masks(
                         sim,
                         input_size=predictor.input_size,
