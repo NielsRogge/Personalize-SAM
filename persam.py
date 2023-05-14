@@ -169,7 +169,10 @@ def persam(args, obj_name, images_path, masks_path, output_path):
                     multimask_output=True)
         best_idx = np.argmax(scores)
 
+        print("Masks shape:", masks.shape)
         print("Scores:", scores)
+
+        print("CASCADED POST-REFINEMENT-2")
 
         # Cascaded Post-refinement-2
         y, x = np.nonzero(masks[best_idx])
