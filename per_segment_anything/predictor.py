@@ -259,7 +259,9 @@ class SamPredictor:
         )
 
         print("Shape of sparse_embeddings:", sparse_embeddings.shape)
+        print("First values of sparse_embeddings:", sparse_embeddings[0, :3, :3])
         print("Shape of dense_embeddings:", dense_embeddings.shape)
+        print("First values of dense_embeddings:", dense_embeddings[0, 0, :3, :3])
 
         # Predict masks
         low_res_masks, iou_predictions = self.model.mask_decoder(
