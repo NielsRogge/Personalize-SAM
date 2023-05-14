@@ -90,9 +90,14 @@ class TwoWayTransformer(nn.Module):
         keys = image_embedding
 
         # Apply transformer blocks and final layernorm
-        for layer in self.layers:
+        for idx, layer in enumerate(self.layers):
             if target_embedding is not None:
                 queries += target_embedding
+
+            if idx == 0:
+                print("Queries before layer 0", queries.shape)
+                print("First values of queries before layer 0", queries[0, :3, :3])
+
             queries, keys = layer(
                 queries=queries,
                 keys=keys,
@@ -100,6 +105,10 @@ class TwoWayTransformer(nn.Module):
                 key_pe=image_pe,
                 attn_sim=attn_sim,
             )
+
+            if idx == 0:
+                print("Queries after layer 0", queries.shape)
+                print("First values of queries after layer 0", queries[0, :3, :3])
 
         # Apply the final attention layer from the points to the image
         q = queries + point_embedding
