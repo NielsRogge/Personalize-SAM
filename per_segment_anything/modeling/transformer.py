@@ -250,6 +250,9 @@ class Attention(nn.Module):
         k = self._separate_heads(k, self.num_heads)
         v = self._separate_heads(v, self.num_heads)
 
+        if print_values:
+            print("Shape of queries:", q.shape)
+
         # Attention
         _, _, _, c_per_head = q.shape
         attn = q @ k.permute(0, 1, 3, 2)  # B x N_heads x N_tokens x N_tokens
@@ -258,7 +261,7 @@ class Attention(nn.Module):
 
         if print_values:
             print("Shape of attn before adding attn_sim: ", attn.shape)
-            print("First values of attn after adding attn_sim: ", attn[0,0,:3,:3])
+            print("First values of attn before adding attn_sim: ", attn[0,0,:3,:3])
 
         if attn_sim is not None:
             attn = attn + attn_sim
