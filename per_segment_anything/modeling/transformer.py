@@ -184,7 +184,7 @@ class TwoWayAttentionBlock(nn.Module):
         # Cross attention block, tokens attending to image embedding
         q = queries + query_pe
         k = keys + key_pe
-        attn_out = self.cross_attn_token_to_image(q=q, k=k, v=keys, attn_sim=attn_sim)
+        attn_out = self.cross_attn_token_to_image(q=q, k=k, v=keys, attn_sim=attn_sim, print_values=print_values)
         queries = queries + attn_out
         queries = self.norm2(queries)
 
@@ -239,7 +239,7 @@ class Attention(nn.Module):
         x = x.transpose(1, 2)
         return x.reshape(b, n_tokens, n_heads * c_per_head)  # B x N_tokens x C
 
-    def forward(self, q: Tensor, k: Tensor, v: Tensor, attn_sim: Tensor = None) -> Tensor:
+    def forward(self, q: Tensor, k: Tensor, v: Tensor, attn_sim: Tensor = None, print_values = False) -> Tensor:
         # Input projections
         q = self.q_proj(q)
         k = self.k_proj(k)
@@ -256,9 +256,17 @@ class Attention(nn.Module):
         attn = attn / math.sqrt(c_per_head)
         attn = torch.softmax(attn, dim=-1)
 
+        if print_values:
+            print("Shape of attn before adding attn_sim: ", attn.shape)
+            print("First values of attn after adding attn_sim: ", attn[0,0,:3,:3])
+
         if attn_sim is not None:
             attn = attn + attn_sim
             attn = torch.softmax(attn, dim=-1)
+
+        if print_values:
+            print("Shape of attn after adding attn_sim: ", attn.shape)
+            print("First values of attn after adding attn_sim: ", attn[0,0,:3,:3])
 
         # Get output
         out = attn @ v
