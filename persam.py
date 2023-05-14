@@ -170,6 +170,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         best_idx = np.argmax(scores)
 
         print("Masks shape:", masks.shape)
+        print("First values of masks:", masks[0,:3,:3])
         print("Scores:", scores)
 
         print("CASCADED POST-REFINEMENT-2")
@@ -181,6 +182,9 @@ def persam(args, obj_name, images_path, masks_path, output_path):
         y_min = y.min()
         y_max = y.max()
         input_box = np.array([x_min, y_min, x_max, y_max])
+
+        print("Input box:", input_box)
+
         masks, scores, logits, _ = predictor.predict(
             point_coords=topk_xy,
             point_labels=topk_label,
