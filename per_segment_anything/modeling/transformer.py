@@ -261,7 +261,8 @@ class Attention(nn.Module):
             print("First values of keys:", k[0,0,:3,:3])
             print("First values of values:", v[0,0,:3,:3])
 
-            print("Mean value of attn_sim:", torch.mean(attn_sim))
+            if attn_sim is not None:
+                print("Mean value of attn_sim:", torch.mean(attn_sim))
 
         # Attention
         _, _, _, c_per_head = q.shape
