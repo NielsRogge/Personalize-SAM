@@ -89,6 +89,8 @@ class TwoWayTransformer(nn.Module):
         queries = point_embedding
         keys = image_embedding
 
+        print("First values of keys before Transformer:", keys[0,0,:3,:3])
+
         # Apply transformer blocks and final layernorm
         for idx, layer in enumerate(self.layers):
             if target_embedding is not None:
