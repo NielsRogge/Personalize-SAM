@@ -247,7 +247,9 @@ class SamPredictor:
             points = None
 
         print("Shape of point_coords:", point_coords.shape)
+        print("First values of point_coords:", point_coords[0, :3, :3])
         print("Shape of point_labels:", point_labels.shape)
+        print("First values of point_labels:", point_labels[0, :3])
 
         # Embed prompts
         sparse_embeddings, dense_embeddings = self.model.prompt_encoder(
