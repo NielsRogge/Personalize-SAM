@@ -159,6 +159,7 @@ def persam(args, obj_name, images_path, masks_path, output_path):
 
         print("Shape of low res masks:", logits.shape)
         print("Mean of low res masks:", logits.astype('float64').mean())
+        print("First values of low res masks:", logits[0,:3,:3])
 
         # Cascaded Post-refinement-1
         masks, scores, logits, _ = predictor.predict(
