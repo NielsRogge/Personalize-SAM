@@ -81,6 +81,9 @@ class TwoWayTransformer(nn.Module):
           torch.Tensor: the processed image_embedding
         """
         # BxCxHxW -> BxHWxC == B x N_image_tokens x C
+        print("Shape of image embeddings:", image_embedding.shape)
+        print("First values of image embeddings:", image_embedding[0,0,:3,:3])
+
         bs, c, h, w = image_embedding.shape
         image_embedding = image_embedding.flatten(2).permute(0, 2, 1)
         image_pe = image_pe.flatten(2).permute(0, 2, 1)
