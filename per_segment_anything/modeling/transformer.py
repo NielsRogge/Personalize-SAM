@@ -104,6 +104,7 @@ class TwoWayTransformer(nn.Module):
                 query_pe=point_embedding,
                 key_pe=image_pe,
                 attn_sim=attn_sim,
+                print_values=idx == 0,
             )
 
             if idx == 0:
@@ -166,7 +167,7 @@ class TwoWayAttentionBlock(nn.Module):
         self.skip_first_layer_pe = skip_first_layer_pe
 
     def forward(
-        self, queries: Tensor, keys: Tensor, query_pe: Tensor, key_pe: Tensor, attn_sim: Tensor
+        self, queries: Tensor, keys: Tensor, query_pe: Tensor, key_pe: Tensor, attn_sim: Tensor, print_values: bool = False,
     ) -> Tuple[Tensor, Tensor]:
         # Self attention block
         if self.skip_first_layer_pe:
@@ -177,12 +178,18 @@ class TwoWayAttentionBlock(nn.Module):
             queries = queries + attn_out
         queries = self.norm1(queries)
 
+        if print_values:
+            print("Queries before cross-attention:", queries[0,:3,:3])
+
         # Cross attention block, tokens attending to image embedding
         q = queries + query_pe
         k = keys + key_pe
         attn_out = self.cross_attn_token_to_image(q=q, k=k, v=keys, attn_sim=attn_sim)
         queries = queries + attn_out
         queries = self.norm2(queries)
+
+        if print_values:
+            print("Queries after cross-attention:", queries[0,:3,:3])
 
         # MLP block
         mlp_out = self.mlp(queries)
