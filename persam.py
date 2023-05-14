@@ -189,6 +189,9 @@ def persam(args, obj_name, images_path, masks_path, output_path):
             multimask_output=True)
         best_idx = np.argmax(scores)
 
+        print("Final scores:", scores)
+        print("Final mask:", masks[0,:3,:3])
+
         # Save masks
         plt.figure(figsize=(10, 10))
         plt.imshow(test_image)
