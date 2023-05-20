@@ -134,6 +134,8 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
             multimask_output=True)
         logits_high = logits_high.flatten(1)
 
+        print("Shape of logits:", logits.shape)
+        print("First values of logits:", logits[:3, :3])
         print("Shape of logits_high:", logits_high.shape)
         print("First values of logits_high:", logits_high[:3, :3])
 
