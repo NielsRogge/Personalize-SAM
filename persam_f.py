@@ -95,7 +95,7 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
     target_feat = (target_feat_max / 2 + target_feat_mean / 2).unsqueeze(0)
 
     print("Shape of target_feat:", target_feat.shape)
-    print("First values of target_feat:", target_feat[0, :3, :3])
+    print("First values of target_feat:", target_feat[0, :3])
 
     # Cosine similarity
     h, w, C = ref_feat.shape
