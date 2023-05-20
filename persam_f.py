@@ -209,6 +209,9 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
         print("Shape of logit:", logit.shape)
         print("First values of logit:", logit[:3, :3])
 
+        print("Shape of logit_high:", logit_high.shape)
+        print("First values of logit_high:", logit_high[:3, :3])
+
         # Cascaded Post-refinement-1
         y, x = np.nonzero(mask)
         x_min = x.min()
@@ -216,6 +219,9 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
         y_min = y.min()
         y_max = y.max()
         input_box = np.array([x_min, y_min, x_max, y_max])
+
+        print("Input box:", input_box)
+
         masks, scores, logits, _ = predictor.predict(
             point_coords=topk_xy,
             point_labels=topk_label,
