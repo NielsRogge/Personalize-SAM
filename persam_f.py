@@ -111,6 +111,8 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
     # Positive location prior
     topk_xy, topk_label = point_selection(sim, topk=1)
 
+    print("Topk_xy:", topk_xy)
+    print("Topk_label:", topk_label)
 
     print('======> Start Training')
     # Learnable mask weights
