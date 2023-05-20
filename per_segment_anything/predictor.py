@@ -259,6 +259,10 @@ class SamPredictor:
             target_embedding=target_embedding
         )
 
+        print("Shape of low_res_masks: ", low_res_masks.shape)
+        print("Input size: ", self.input_size)
+        print("Original size: ", self.original_size)
+
         # Upscale the masks to the original image resolution
         high_res_masks = self.model.postprocess_masks(low_res_masks, self.input_size, self.original_size)
 
