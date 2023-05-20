@@ -205,6 +205,9 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
 
         logits = logits * weights_np[..., None]
         logit = logits.sum(0)
+        
+        print("Shape of logit:", logit.shape)
+        print("First values of logit:", logit[0, :3, :3])
 
         # Cascaded Post-refinement-1
         y, x = np.nonzero(mask)
