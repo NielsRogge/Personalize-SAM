@@ -134,11 +134,6 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
             multimask_output=True)
         logits_high = logits_high.flatten(1)
 
-        print("Shape of logits:", logits.shape)
-        print("First values of logits:", logits[:3, :3])
-        print("Shape of logits_high:", logits_high.shape)
-        print("First values of logits_high:", logits_high[:3, :3])
-
         # Weighted sum three-scale masks
         weights = torch.cat((1 - mask_weights.weights.sum(0).unsqueeze(0), mask_weights.weights), dim=0)
         logits_high = logits_high * weights
@@ -152,9 +147,6 @@ def persam_f(args, obj_name, images_path, masks_path, output_path):
         loss.backward()
         optimizer.step()
         scheduler.step()
-
-        if train_idx == 0:
-            break
 
         if train_idx % args.log_epoch == 0:
             print('Train Epoch: {:} / {:}'.format(train_idx, args.train_epoch))
